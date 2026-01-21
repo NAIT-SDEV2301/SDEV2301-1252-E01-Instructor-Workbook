@@ -2,4 +2,5 @@
   <Project Path="L01_HelloWorldWithoutTopLevelStatements/L01_HelloWorldWithoutTopLevelStatements.csproj" />
   <Project Path="L01_HelloWorldWithTopLevelStatement/L01_HelloWorldWithTopLevelStatement.csproj" />
   <Project Path="L04_CupConverter/L04_CupConverter.csproj" Id="c2b6a92f-f594-409a-811a-350ba8c3567f" />
+  <Project Path="L04_MethodDemo/L04_MethodDemo.csproj" Id="396e4e1c-3910-4edc-9a0c-73a7f31af395" />
 </Solution>
