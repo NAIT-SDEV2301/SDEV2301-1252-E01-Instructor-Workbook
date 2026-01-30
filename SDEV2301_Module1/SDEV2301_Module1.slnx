@@ -12,6 +12,10 @@
   <Project Path="L08_Demo01/L08_Demo01.csproj" Id="5d2c440a-3dd2-444a-bb11-162bdb01c246" />
   <Project Path="L08_Practice01/L08_Practice01.csproj" Id="3742c449-ec65-4e83-9aae-0fc9ba75a2a9" />
   <Project Path="L08_Practice02/L08_Practice02.csproj" Id="ce5cdb1c-16f2-4616-82f6-208ecac1114f" />
+  <Project Path="L09_Calculator.Tests/L09_Calculator.Tests.csproj" Id="795d9273-0891-45a1-903f-955b915c195e" />
+  <Project Path="L09_Calculator/L09_Calculator.csproj" Id="a8014f88-f9ba-480c-baab-2199f1d1c63e" />
+  <Project Path="L09_TddDomain.Tests/L09_TddDomain.Tests.csproj" Id="b3879360-e895-4a16-befb-db9b95b9f9f2" />
+  <Project Path="L09_TddDomain/L09_TddDomain.csproj" Id="45332034-b17b-45a6-a5be-01356e527465" />
   <Project Path="L10_Demo01/L10_Demo01.csproj" Id="1fdbfce6-a6ff-4caf-b3ae-4661185e6d4a" />
   <Project Path="L4_MethodDemo_Guided/L4_MethodDemo_Guided.csproj" Id="0f724204-2093-43fb-848d-7df5ae2b7d93" />
 </Solution>
