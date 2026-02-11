@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Module02.Lesson13.Activity1/Module02.Lesson13.Activity1.csproj" />
+  <Project Path="Module02.Lesson13.PokemonExercise/Module02.Lesson13.PokemonExercise.csproj" />
+  <Project Path="Module02.Lesson14.Activity1/Module02.Lesson14.Activity1.csproj" />
+  <Project Path="Module02.Lesson16.EfCoreIntro/Module02.Lesson16.EfCoreIntro.csproj" Id="74e72762-dfdc-4179-94f3-6aa317e0ed5d" />
+</Solution>
