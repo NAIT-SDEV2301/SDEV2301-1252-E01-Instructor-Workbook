@@ -5,4 +5,5 @@
   <Project Path="Module02.Lesson16.EfCoreIntro/Module02.Lesson16.EfCoreIntro.csproj" Id="74e72762-dfdc-4179-94f3-6aa317e0ed5d" />
   <Project Path="Module02.Lesson16.EfCoreSetupDemo/Module02.Lesson16.EfCoreSetupDemo.csproj" Id="f68f5589-b699-454b-bdef-c82a41b95e1d" />
   <Project Path="Module02.Lesson17.EfCoreCrudDemo/Module02.Lesson17.EfCoreCrudDemo.csproj" Id="7133a394-fb4d-416a-910f-1510adb9cfe5" />
+  <Project Path="Module02.Lesson17.EfCoreMigration/Module02.Lesson17.EfCoreMigration.csproj" Id="f54f9b32-4524-41dd-a85e-d14fb27ddda8" />
 </Solution>
