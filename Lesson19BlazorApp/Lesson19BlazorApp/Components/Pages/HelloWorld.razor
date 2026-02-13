@@ -1,0 +1,20 @@
+﻿@page "/hello-world"
+
+<h3>Hello World Component</h3>
+
+<p>The date time now is: @DateTime.Now</p>
+
+<label>Enter some text:</label>
+<input @bind="_userText" />
+
+<p>You typed: @_userText</p>
+
+<button @onclick="() => _count++">Increase</button>
+
+<p>Count: @_count</p>
+
+@code {
+    private string _message = "Hello from Razor";
+    private string _userText = "";
+    private int _count = 0;
+}
