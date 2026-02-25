@@ -1,0 +1,21 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<Greeting Name="Jean" />
+<Greeting Name="Liam" />
+<Greeting Name="Derek" />
+<Greeting Name="Hinda" />
+<Greeting Name="Yousef" />
+<p>Counter: @count</p>
+
+<ActionButton Label="Add" OnClick="Increment" BgColor="Cyan"/>
+
+@code {
+    private int count = 0;
+
+    private void Increment()
+    {
+        count += 2;
+    }
+}

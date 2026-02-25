@@ -1,0 +1,9 @@
+﻿<button @onclick="OnClick" style="background-color: @BgColor">
+    @Label
+</button>
+
+@code {
+    [Parameter] public string Label { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public string BgColor { get; set; } = "#FF0000";
+}
