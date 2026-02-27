@@ -10,12 +10,23 @@
 <p>Counter: @count</p>
 
 <ActionButton Label="Add" OnClick="Increment" BgColor="Cyan"/>
-
+<ActionButton Label="Decrement" OnClick="Decrement" />
+<ActionButton Label="Double Value" OnClick="DoubleCount" BgColor="Pink" />
 @code {
     private int count = 0;
 
     private void Increment()
     {
-        count += 2;
+        count += 1;
+    }
+
+    private void Decrement()
+    {
+        count -= 1;
+    }
+
+    private void DoubleCount()
+    {
+        count *= 2;
     }
 }

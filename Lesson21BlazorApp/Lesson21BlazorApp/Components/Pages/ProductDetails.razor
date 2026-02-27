@@ -1,0 +1,19 @@
+﻿@* Parameterized Route *@
+@page "/product/{Id:int}" 
+
+@inject NavigationManager NavManager
+
+<h3>Product Details</h3>
+<p>Product ID: @Id</p>
+
+<button @onclick="GoToAboutPage">Navigate to About Page</button>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private void GoToAboutPage()
+    {
+        NavManager.NavigateTo("/about");
+    }
+}
