@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PokemonPractice.ConsoleApp/PokemonPractice.ConsoleApp.csproj" />
+  <Project Path="PokemonPractice.Data/PokemonPractice.Data.csproj" />
+</Solution>
