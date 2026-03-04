@@ -14,8 +14,8 @@ namespace PokemonPractice.Data.Data
         // DbSet properties for each entity in the model.
         // EF Core initializes DbSet properties at runtime.
         // = default!; suppresses nullable warnings.
-        public DbSet<Pokemon> Pokemons { get; set; }
-        public DbSet<PokeType> PokeTypes { get; set; }
+        public DbSet<Pokemon> Pokemons { get; set; } = default!;
+        public DbSet<PokeType> PokeTypes { get; set; } = default!;
 
         // Configuring the many-to-many relationship between Pokemon and PokeType.
         override protected void OnModelCreating(ModelBuilder modelBuilder)
