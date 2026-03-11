@@ -1,0 +1,37 @@
+﻿@page "/"
+@using Lesson24DemoBlazorApp.Services
+@inject TimeService TimeService
+@inject MessageService MessageService
+
+<PageTitle>Lesson 24</PageTitle>
+
+<h1>Lesson 24 - Services and Dependency Injection in Blazor</h1>
+
+<p>By the end of this lesson, you will be able to:
+</p>
+<ul>
+    <li>Explain what a service is and why it should be used in Blazor apps.</li>
+    <li>Register services using the DI container (builder.Services.Add…).</li>
+    <li>Inject a service into a Razor component using @@inject.</li>
+    <li>Call service methods from components.</li>
+    <li>Understand service lifetimes: Transient, Scoped, Singleton.</li>
+</ul>
+
+<h2>Using injected TimeService in page</h2>
+<p>The time is: @TimeService.GetCurrentTime()</p>
+
+<h2>Using injected Message in page</h2>
+<h3>@MessageService.GetGreeting()</h3>
+
+<h2>Task 5 — Display Quote on Button Click</h2>
+<p>@quote</p>
+<button @onclick="ShowQuote">Get Quote</button>
+
+@code {
+    private string quote;
+
+    private void ShowQuote()
+    {
+        quote = MessageService.GetRandomQuote();
+    }
+}

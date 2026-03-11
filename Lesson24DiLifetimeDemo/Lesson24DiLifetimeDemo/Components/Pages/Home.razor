@@ -1,0 +1,20 @@
+﻿@page "/"
+@using Lesson24DiLifetimeDemo.Services
+@* TODO: DI Pattern 3: Inject the service *@
+@inject MessageService MessageService
+@inject SingletonService Singleton
+@inject ScopedService Scoped
+@inject TransientService Transient
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+@MessageService.GetGreeting()
+
+<p style="color: steelblue"><strong>Singleton ID:</strong>@Singleton.InstanceId</p>
+<p style="color: green"><strong>Scoped ID:</strong>@Scoped.InstanceId</p>
+<p style="color: red"><strong>Transient ID ID:</strong>@Transient.InstanceId</p>
+
+
+Welcome to your new app.
