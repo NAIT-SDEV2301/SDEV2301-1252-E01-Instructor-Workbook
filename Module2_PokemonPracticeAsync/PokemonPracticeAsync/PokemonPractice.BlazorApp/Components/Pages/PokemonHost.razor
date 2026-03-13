@@ -1,0 +1,33 @@
+﻿@page "/pokemon-host"
+@using PokemonPractice.Data.Models
+@using PokemonPractice.Data.Services
+@inject PokemonPractice.Data.Services.PokemonService PokemonService
+
+<h3>PokemonHost</h3>
+
+<PokemonForm FormModel="_model" OnAdd="HandleAdd" />
+
+<PokemonList Pokemons="_pokemons" OnDelete="HandleDelete" />
+
+@code {
+    private List<Pokemon> _pokemons = new();
+    private Pokemon _model = new();
+
+    private async Task HandleAdd(Pokemon added)
+    {
+        await PokemonService.AddPokemonAsync(added.Name);
+        _model = new();
+        _pokemons = await PokemonService.ListPokemonsAsync();
+    }
+
+    private async Task HandleDelete(int pokemonId)
+    {
+        await PokemonService.DeleteAsync(pokemonId);
+        _pokemons = await PokemonService.ListPokemonsAsync();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _pokemons = await PokemonService.ListPokemonsAsync();
+    }
+}

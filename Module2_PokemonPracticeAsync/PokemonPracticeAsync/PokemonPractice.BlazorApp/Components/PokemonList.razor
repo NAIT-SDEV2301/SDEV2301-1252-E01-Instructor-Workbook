@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using PokemonPractice.Data.Models
+
+<h3>Pokemon List Page</h3>
+
+@if (Pokemons.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Types</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var pokemon in Pokemons)
+            {
+                <tr>
+                    <td>@pokemon.Id</td>
+                    <td>@pokemon.Name</td>
+                    <td>
+                        @if (pokemon.Types.Any())
+                        {
+                            <ul>
+                                @foreach (var type in pokemon.Types)
+                                {
+                                    <li>@type</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No Type assigned</p>
+                        }
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" @onclick="() => DeletePokemon(pokemon.Id)">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter]
+    // private List<Pokemon> _pokemons = new();
+    public IEnumerable<Pokemon> Pokemons { get; set; }
+            = Enumerable.Empty<Pokemon>();
+
+    [Parameter]
+    public EventCallback<int> OnDelete { get; set; }
+
+    private async Task DeletePokemon(int pokemonId)
+    {
+        await OnDelete.InvokeAsync(pokemonId);
+    }
+
+}

@@ -1,0 +1,32 @@
+﻿@using PokemonPractice.Data.Models
+
+<h3>Pokemon Form</h3>
+
+<EditForm Model="FormModel" OnValidSubmit="SaveAsync">
+    <ValidationSummary />
+    <DataAnnotationsValidator />
+
+    <div class="mb-2">
+        <label>Name:</label>
+        <InputText @bind-Value="FormModel.Name" class="form-control" />
+        <ValidationMessage For="@(() => FormModel.Name)" />
+    </div>
+
+    <button class="btn btn-primary" type="submit">
+        Save Changes
+    </button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Pokemon FormModel { get; set; } = new Pokemon();
+    // private Pokemon formModel = new();
+
+    [Parameter]
+    public EventCallback<Pokemon> OnAdd { get; set; }
+
+    private async Task SaveAsync()
+    {
+        await OnAdd.InvokeAsync(FormModel);
+    }
+}

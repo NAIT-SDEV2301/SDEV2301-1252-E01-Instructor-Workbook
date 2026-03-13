@@ -62,5 +62,15 @@ namespace PokemonPractice.Data.Services
                 .ToListAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            Pokemon? existing = await _db.Pokemons.SingleOrDefaultAsync(p => p.Id == id);
+            if (existing is not null)
+            {
+                _db.Pokemons.Remove(existing);
+                await _db.SaveChangesAsync();
+            }
+        }
+
     }
 }
