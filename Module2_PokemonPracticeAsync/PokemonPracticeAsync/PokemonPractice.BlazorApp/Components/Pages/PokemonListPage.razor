@@ -1,10 +1,52 @@
 ﻿@page "/pokidex"
 @using PokemonPractice.Data.Services
+@using PokemonPractice.Data.Models
 @inject PokemonService PokemonService
 
 <h3>Pokemon List Page</h3>
 
+@if (_pokemons.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <td>Types</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var pokemon in _pokemons)
+            {
+                <tr>
+                    <td>@pokemon.Id</td>
+                    <td>@pokemon.Name</td>
+                    <td>
+                        @if(pokemon.Types.Any())
+                        {
+                            <ul>
+                                @foreach(var type in pokemon.Types)
+                                {
+                                    <li>@type</li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <p>No Type assigned</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
 @code {
+    private List<Pokemon> _pokemons = new();
 
+    protected override async Task OnInitializedAsync()
+    {
+        _pokemons = await PokemonService.ListPokemonsAsync();
+    }
 }

@@ -1,0 +1,37 @@
+﻿@page "/form-demo"
+@using Lesson22BlazorApp.Models
+
+@if (string.IsNullOrWhiteSpace(feedbackMessage))
+{
+    <h3>Contact Form</h3>
+}
+else
+{
+    <h3>@feedbackMessage</h3>
+}
+
+<EditForm Model="_model" OnValidSubmit="HandleSubmit">
+    <ValidationSummary />
+    <DataAnnotationsValidator />
+
+    <label>Name:</label>
+    <InputText @bind-Value="_model.Name" />
+    <ValidationMessage For="@(() => _model.Name)" />
+
+    <label>Age:</label>
+    <InputNumber @bind-Value="_model.Age" />
+    <ValidationMessage For="@(() => _model.Age)" />
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+@code {
+    private ContactForm _model = new();
+    private string? feedbackMessage;
+
+    private void HandleSubmit()
+    {
+        // Called only when the form is valid
+        feedbackMessage = $"Thank you, {_model.Name}, age {_model.Age}, for your submission!";
+    }
+}

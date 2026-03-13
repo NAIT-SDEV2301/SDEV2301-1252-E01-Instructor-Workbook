@@ -6,14 +6,14 @@
 
 <h3>Pokemon Form Page</h3>
 
-<EditForm Model="formModel" OnValidSubmit="SaveAsync">
+<EditForm Model="_formModel" OnValidSubmit="SaveAsync">
     <ValidationSummary />
     <DataAnnotationsValidator />
 
     <div class="mb-2">
         <label>Name:</label>
-        <InputText @bind-Value="formModel.Name" class="form-control" />
-        <ValidationMessage For="@(() => formModel.Name)" />
+        <InputText @bind-Value="_formModel.Name" class="form-control" />
+        <ValidationMessage For="@(() => _formModel.Name)" />
     </div>
 
     <button class="btn btn-primary" type="submit">
@@ -24,14 +24,14 @@
 @feedback
 
 @code {
-    private Pokemon formModel = new Pokemon();
+    private Pokemon _formModel = new Pokemon();
     // private Pokemon formModel = new();
     private string feedback = "";
 
     private async Task SaveAsync()
     {
-        await PokemonService.AddPokemonAsync(formModel.Name);
-        feedback = $"Added Pokemon {formModel.Name}";
-        formModel = new();
+        await PokemonService.AddPokemonAsync(_formModel.Name);
+        feedback = $"Added Pokemon {_formModel.Name}";
+        _formModel = new();
     }
 }

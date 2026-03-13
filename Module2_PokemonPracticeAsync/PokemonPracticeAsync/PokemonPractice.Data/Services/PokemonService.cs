@@ -57,6 +57,7 @@ namespace PokemonPractice.Data.Services
         public async Task<List<Pokemon>> ListPokemonsAsync()
         {
             return await _db.Pokemons
+                .Include(p => p.Types)
                 .OrderBy(p => p.Name)
                 .ToListAsync();
         }
