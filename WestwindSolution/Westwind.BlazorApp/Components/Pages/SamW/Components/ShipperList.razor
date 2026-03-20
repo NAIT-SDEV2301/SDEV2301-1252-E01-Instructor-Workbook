@@ -1,0 +1,49 @@
+﻿@* 
+    ShipperList.razor
+    -----------------
+    Purpose:
+    Displays a collection of Shipper records in a table.
+
+    Responsibilities:
+    - Receives a list of shippers from the host page.
+    - Renders one ShipperRow component for each shipper.
+    - Raises edit events back to the host page.
+
+    Notes:
+    - This component is responsible only for display.
+    - It does not call the BLL or access the database directly.
+*@
+
+@using WestwindSystem.Entities
+
+@if (Shippers.Count == 0)
+{
+    <p>No shippers found.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Company Name</th>
+                <th>Phone</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var shipper in Shippers)
+            {
+                <ShipperRow Shipper="shipper" OnEdit="OnEdit" />
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    [Parameter] 
+    public List<Shipper> Shippers { get; set; } = [];
+
+    [Parameter] 
+    public EventCallback<Shipper> OnEdit { get; set; }
+
+}

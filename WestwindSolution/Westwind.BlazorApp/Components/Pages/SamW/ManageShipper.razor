@@ -1,0 +1,136 @@
+﻿@* 
+    ManageShipper.razor
+    -------------------
+    Purpose:
+    Host page for adding, editing, and deleting a single Shipper record.
+
+    Responsibilities:
+    - Loads an existing shipper when an ID is provided in the route.
+    - Creates a new shipper when no ID is provided in the route.
+    - Calls the BLL service for add, update, and delete operations.
+    - Handles navigation back to the search page.
+
+    Notes:
+    - This page works with one record at a time.
+    - This page is the host for the manage workflow.
+    - Delete operations should confirm with the user before calling the BLL.
+
+    This component is part of the reference architecture for the group project.
+*@
+
+@page "/samw-shippers/manage"
+@page "/samw-shippers/manage/{shipperId:int}"
+@using Westwind.BlazorApp.Components.Pages.SamW.Components
+@using WestwindSystem.Entities
+@using WestwindSystem.BLL.SamW
+@inject ShipperServices ShipperServices
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+<PageTitle>Manage Shipper</PageTitle>
+
+<h3>Manage Shipper</h3>
+
+@if (!string.IsNullOrWhiteSpace(_errorMessage))
+{
+    <div class="alert alert-danger">@_errorMessage</div>
+}
+
+@if (_shipper is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ShipperForm Shipper="_shipper"
+                 IsNew="shipperId is null"
+                 OnSave="HandleSave"
+                 OnDelete="HandleDelete"
+                 OnCancel="HandleCancel" />
+}
+
+@code {
+    [Parameter] 
+    public int? shipperId { get; set; }
+
+    private Shipper? _shipper;
+    private string _errorMessage = string.Empty;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            _errorMessage = string.Empty;
+
+            if (shipperId is null)
+            {
+                _shipper = new Shipper();
+            }
+            else
+            {
+                _shipper = await ShipperServices.FindShipperById(shipperId.Value);
+
+                if (_shipper is null)
+                {
+                    _errorMessage = $"Shipper {shipperId.Value} was not found.";
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+    }
+
+    private async Task HandleSave(Shipper shipper)
+    {
+        try
+        {
+            _errorMessage = string.Empty;
+
+            if (shipper.ShipperID == 0)
+            {
+                await ShipperServices.AddShipperAsync(shipper);
+            }
+            else
+            {
+                await ShipperServices.UpdateShipperAsync(shipper);
+            }
+
+            Navigation.NavigateTo("/samw-shippers");
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+    }
+
+    private async Task HandleDelete(Shipper shipper)
+    {
+        bool confirmed = await JS.InvokeAsync<bool>(
+            "confirm",
+            $"Are you sure you want to delete shipper '{shipper.CompanyName}'?");
+
+        if (!confirmed)
+        {
+            return;
+        }
+
+        try
+        {
+            _errorMessage = string.Empty;
+            await ShipperServices.DeleteShipperAsync(shipper.ShipperID);
+            Navigation.NavigateTo("/samw-shippers");
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+    }
+
+    private Task HandleCancel()
+    {
+        Navigation.NavigateTo("/samw-shippers");
+        return Task.CompletedTask;
+    }
+}

@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Database/README.md" />
+    <File Path="Database/WestWind.bacpac" />
+  </Folder>
+  <Project Path="Westwind.BlazorApp/Westwind.BlazorApp.csproj" />
+  <Project Path="WestwindSystem/WestwindSystem.csproj" />
+</Solution>

@@ -1,0 +1,69 @@
+﻿@* 
+    ShipperSearch.razor
+    -------------------
+    Purpose:
+    Host page for searching and selecting Shipper records.
+
+    Responsibilities:
+    - Holds the page state for search results and error messages.
+    - Calls the BLL service to search for matching shippers.
+    - Navigates to the ManageShipper page for add or edit operations.
+
+    Notes:
+    - This page works with many records.
+    - This page is the host for the search workflow.
+    - Child components send events up to this host page.
+
+    This component is part of the reference architecture for the group project.
+*@
+
+
+@page "/samw-shippers"
+
+@using Westwind.BlazorApp.Components.Pages.SamW.Components
+@using WestwindSystem.Entities
+@using WestwindSystem.BLL.SamW
+@inject ShipperServices ShipperServices
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
+
+<PageTitle>Shipper Search</PageTitle>
+
+<h3>Shipper Search</h3>
+
+<ShipperSearchForm OnSearch="HandleSearch" OnAddNew="HandleAddNew" />
+
+<ShipperList Shippers="_shippers" OnEdit="HandleEdit" />
+
+@if (!string.IsNullOrWhiteSpace(_errorMessage))
+{
+    <div class="alert alert-danger">@_errorMessage</div>
+}
+
+@code {
+    private List<Shipper> _shippers = [];
+    private string _errorMessage = string.Empty;
+
+    private async Task HandleSearch(string searchTerm)
+    {
+        try
+        {
+            _errorMessage = string.Empty;
+            _shippers = await ShipperServices.SearchShippersAsync(searchTerm);
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = ex.Message;
+        }
+    }
+
+    private void HandleAddNew()
+    {
+        Navigation.NavigateTo("/samw-shippers/manage");
+    }
+
+    private void HandleEdit(Shipper shipper)
+    {
+        Navigation.NavigateTo($"/samw-shippers/manage/{shipper.ShipperID}");
+    }
+}

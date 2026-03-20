@@ -1,0 +1,64 @@
+﻿@page "/"
+
+<PageTitle>Reference Project</PageTitle>
+
+<h1>WestWind Reference Project</h1>
+
+<p>
+    This sample project demonstrates the expected architecture for the group project.
+    The application uses a layered design with a Business Logic Layer (BLL),
+    Data Access Layer (DAL), and Blazor UI.
+</p>
+
+<hr />
+
+<h3>Architecture Overview</h3>
+
+<ul>
+    <li><b>UI (Blazor Components)</b> – Displays data and calls services</li>
+    <li><b>BLL (Services)</b> – Contains business rules and validation</li>
+    <li><b>DAL (DbContext)</b> – Provides database access through EF Core</li>
+</ul>
+
+<h3>Architecture Rules</h3>
+
+<ol>
+    <li>Blazor components must call BLL services for all data operations.</li>
+    <li>Blazor components must NOT access DbContext directly.</li>
+    <li>Each BLL method creates its own DbContext using IDbContextFactory.</li>
+    <li>All validation and business rules belong in the BLL.</li>
+    <li>UI components display messages but do not enforce business rules.</li>
+    <li>CRUD services follow the pattern: Guard → Context → Query → Action → Save.</li>
+    <li>Read-only queries should use AsNoTracking().</li>
+    <li>Friendly error messages should be surfaced from the BLL to the UI.</li>
+</ol>
+
+<hr />
+
+<h3>Example Pages</h3>
+
+<ul>
+    <li><NavLink href="/samw-shippers">Shippers Search</NavLink></li>
+</ul>
+
+<hr />
+
+<h3>Project Structure</h3>
+
+<pre>
+    WestwindSolution
+    │
+    ├─ WestwindSystem
+    │  ├─ Entities
+    │  ├─ DAL
+    │  └─ BLL
+    │
+    └─ Westwind.BlazorApp
+        ├─ Components
+        │   └─ Pages
+        └─ Program.cs
+</pre>
+
+<p>
+    Use this project as a guide when designing your own group project architecture.
+</p>

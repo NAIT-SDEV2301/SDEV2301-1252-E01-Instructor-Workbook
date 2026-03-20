@@ -1,0 +1,76 @@
+﻿@* 
+    ShipperForm.razor
+    -----------------
+    Purpose:
+    Displays the edit form used to add or update a Shipper record.
+
+    Responsibilities:
+    - Displays editable input controls for one shipper.
+    - Raises OnSave when the form is submitted.
+    - Raises OnDelete when the user chooses to delete the record.
+    - Raises OnCancel when the user cancels the operation.
+
+    Notes:
+    - This component receives the current shipper as a parameter from the host page.
+    - This component does not directly call the BLL service.
+    - The host page decides what action to take when Save, Delete, or Cancel occurs.
+*@
+
+@using WestwindSystem.Entities
+
+<EditForm Model="Shipper" OnValidSubmit="HandleSave">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Company Name</label>
+        <InputText class="form-control" @bind-Value="Shipper.CompanyName" />
+        <ValidationMessage For="@(() => Shipper.CompanyName)" />
+    </div>
+
+    <div class="mb-3">
+        <label>Phone</label>
+        <InputText class="form-control" @bind-Value="Shipper.Phone" />
+        <ValidationMessage For="@(() => Shipper.Phone)" />
+    </div>
+
+    <button class="btn btn-success">Save</button>
+    <button class="btn btn-secondary ms-2" type="button" @onclick="HandleCancel">Cancel</button>
+
+    @if (!IsNew)
+    {
+        <button class="btn btn-danger ms-2" type="button" @onclick="HandleDelete">Delete</button>
+    }
+</EditForm>
+
+@code {
+    [Parameter] 
+    public Shipper Shipper { get; set; } = new();
+    
+    [Parameter] 
+    public bool IsNew { get; set; }
+    
+    [Parameter]
+    public EventCallback<Shipper> OnSave { get; set; }
+    
+    [Parameter] 
+    public EventCallback<Shipper> OnDelete { get; set; }
+    
+    [Parameter] 
+    public EventCallback OnCancel { get; set; }
+
+    private async Task HandleSave()
+    {
+        await OnSave.InvokeAsync(Shipper);
+    }
+
+    private async Task HandleDelete()
+    {
+        await OnDelete.InvokeAsync(Shipper);
+    }
+
+    private async Task HandleCancel()
+    {
+        await OnCancel.InvokeAsync();
+    }
+}

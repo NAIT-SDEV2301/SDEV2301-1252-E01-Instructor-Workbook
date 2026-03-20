@@ -1,0 +1,38 @@
+﻿@* 
+    ShipperRow.razor
+    ----------------
+    Purpose:
+    Displays one Shipper record as a single table row.
+
+    Responsibilities:
+    - Shows the values for one shipper.
+    - Raises OnEdit when the user wants to manage that shipper.
+
+    Notes:
+    - This component demonstrates the "Parameters Down, Events Up" pattern.
+    - Data is received from the parent, and user actions are sent back to the parent.
+*@
+
+@using WestwindSystem.Entities
+
+<tr>
+    <td>@Shipper.CompanyName</td>
+    <td>@Shipper.Phone</td>
+    <td>
+        <button class="btn btn-sm btn-warning"
+                @onclick="() => OnEdit.InvokeAsync(Shipper)">
+            Edit
+        </button>
+    </td>
+</tr>
+
+@code {
+    [Parameter] 
+    public Shipper Shipper { get; set; } = default!;
+
+    [Parameter] 
+    public EventCallback<Shipper> OnEdit { get; set; }
+
+    [Parameter] 
+    public EventCallback<Shipper> OnDelete { get; set; }
+}

@@ -1,0 +1,46 @@
+﻿@* 
+    ShipperSearch.razor
+    -------------------
+    Purpose:
+    Host page for searching and selecting Shipper records.
+
+    Responsibilities:
+    - Holds the page state for search results and error messages.
+    - Calls the BLL service to search for matching shippers.
+    - Navigates to the ManageShipper page for add or edit operations.
+
+    Notes:
+    - This page works with many records.
+    - This page is the host for the search workflow.
+    - Child components send events up to this host page.
+*@
+
+<div class="row g-2 mb-3">
+    <div class="col-auto">
+        <InputText class="form-control" @bind-Value="_searchTerm" placeholder="Search by company or phone" />
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary" @onclick="HandleSearchClick">Search</button>
+        <button class="btn btn-success ms-2" @onclick="HandleAddNewClick">Add New</button>
+    </div>
+</div>
+
+@code {
+    private string _searchTerm = string.Empty;
+
+    [Parameter] 
+    public EventCallback<string> OnSearch { get; set; }
+    
+    [Parameter] 
+    public EventCallback OnAddNew { get; set; }
+
+    private async Task HandleSearchClick()
+    {
+        await OnSearch.InvokeAsync(_searchTerm);
+    }
+
+    private async Task HandleAddNewClick()
+    {
+        await OnAddNew.InvokeAsync();
+    }
+}
