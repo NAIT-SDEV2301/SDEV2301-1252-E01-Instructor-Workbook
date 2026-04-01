@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lesson34MauiBlazorIntro"
+             xmlns:components="clr-namespace:Lesson34MauiBlazorIntro.Components"
+             x:Class="Lesson34MauiBlazorIntro.MainPage">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <BlazorWebView x:Name="blazorWebView" HostPage="wwwroot/index.html">
+            <BlazorWebView.RootComponents>
+                <RootComponent Selector="#app" ComponentType="{x:Type components:Routes}" />
+            </BlazorWebView.RootComponents>
+        </BlazorWebView>
+
+    </Grid>
+
+</ContentPage>
