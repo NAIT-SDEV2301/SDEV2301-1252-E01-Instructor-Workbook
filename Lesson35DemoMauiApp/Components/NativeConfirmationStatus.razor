@@ -1,0 +1,29 @@
+﻿@implements IDisposable
+@using Lesson35DemoMauiApp.Models
+
+<h4>Last native confirmation:</h4>
+<p>@status</p>
+
+@code {
+    private string status = "No response yet";
+
+    protected override void OnInitialized()
+    {
+        // Subscribe to the bridge event when the component is created
+        ConfirmationBridge.Instance.ConfirmationChanged += OnConfirmationChanged;
+    }
+
+    private void OnConfirmationChanged(bool result)
+    {
+        status = result ? "User clicked YES" : "User clicked NO";
+
+        // Ensure UI update happens on the correct context
+        InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        // Unsubscribe to avoid memory leaks when component is destroyed
+        ConfirmationBridge.Instance.ConfirmationChanged -= OnConfirmationChanged;
+    }
+}

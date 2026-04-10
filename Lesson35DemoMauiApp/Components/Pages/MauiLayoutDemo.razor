@@ -1,0 +1,19 @@
+﻿@page "/maui-layout-demo"
+@* This @page directive says: when the app goes to /maui-layout-demo, render this component. *@
+
+<h3>Sidebar Layout Demo (Blazor)</h3>
+
+<NativeConfirmationStatus />
+
+<div style="display: grid; grid-template-columns: 150px 1fr; min-height: 300px;">
+    <div style="background: #eeeeee; padding: 10px;">
+        <h4>Sidebar</h4>
+        <button class="btn btn-primary">Click Me</button>
+    </div>
+
+    <div style="padding: 10px;">
+        <h4>Main Content Area</h4>
+        <p>This is rendered by Blazor as normal HTML.</p>
+        <input type="date" />
+    </div>
+</div>

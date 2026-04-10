@@ -1,0 +1,18 @@
+﻿@page "/binding-demo"
+
+<h3>Binding Demo</h3>
+
+<input @bind="_name" @bind:event="oninput" />
+<p>Hello @_name</p>
+
+<p>One-way binding example:</p>
+<input value="@_name" /> 
+
+<p>@@bind is shorthand for writing BOTH a value and an event handler</p>
+<input value="@_name" @oninput="(e => _name = e.Value?.ToString())" />
+
+@code {
+    private string _name = "";
+
+
+}

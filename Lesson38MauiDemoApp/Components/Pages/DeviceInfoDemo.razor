@@ -1,0 +1,77 @@
+﻿@page "/deviceinfo"
+@using Lesson38MauiDemoApp.Services
+@inject DeviceService DeviceService
+
+<h3>Device Info Demo</h3>
+
+<p>Model : @deviceModel</p>
+<p>Manufacturer: @manufacturer</p>
+<p>OS Version: @osVersion</p>
+
+@if (batteryLevel is null)
+{
+    <p><strong>Level:</strong>Not Available</p>
+}
+else
+{
+    <p><strong>Level:</strong>@batteryLevel</p>
+}
+
+<p>Power Source: @powerSource</p>
+
+<button class="btn btn-primary" @onclick="LoadData">Refresh</button>
+
+@feedbackMessage
+
+<button class="btn btn-danger" 
+    @onclick="() => ToggleFlashlight(true)">Turn On Flashlight</button>
+
+<button class="btn btn-danger" 
+    @onclick="() => ToggleFlashlight(false)">Turn Off Flashlight</button>
+
+
+@code {
+    private string deviceModel = "";
+    private string manufacturer = "";
+    private string osVersion = "";
+    private int? batteryLevel = null;
+    private string powerSource = "";
+
+    private string feedbackMessage = "";
+
+    protected override void OnInitialized()
+    {
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        deviceModel = DeviceService.GetModel();
+        manufacturer = DeviceService.GetManufacturer();
+        osVersion = DeviceService.GetOsVersion();
+
+        batteryLevel = DeviceService.GetBatteryLevel();
+        powerSource = DeviceService.GetPowerSource();
+    }
+
+    private async void ToggleFlashlight(bool flashlightSwitch)
+    {
+        try
+        {
+            if (flashlightSwitch)
+            {
+                await Flashlight.Default.TurnOnAsync();
+            }
+            else
+            {
+                await Flashlight.Default.TurnOffAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions, e.g., flashlight not available or permission issues
+            //Console.WriteLine($"Error toggling flashlight: {ex.Message}");
+            feedbackMessage = $"Error toggling flashlight: {ex.Message}";
+        }
+    }
+}

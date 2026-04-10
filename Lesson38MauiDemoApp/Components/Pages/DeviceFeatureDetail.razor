@@ -1,0 +1,43 @@
+﻿@page "/feature/{Type}"
+@using Lesson38MauiDemoApp.Services
+@inject DeviceService DeviceService
+
+<h3>Device Feature Detail: @Type</h3>
+
+@if (Type == "battery")
+{
+    <p>@_batteryInfo</p>
+}
+else if (Type == "deviceinfo")
+{
+    <p>@_deviceInfo</p>
+}
+else
+{
+    <p>Unknown feature type.</p>
+}
+
+@code {
+    [Parameter]
+    public string? Type { get; set; }
+
+    private string? _batteryInfo;
+    private string? _deviceInfo;
+
+    protected override void OnParametersSet()
+    {
+        if (Type == "battery")
+        {
+            var batteryLevel = DeviceService.GetBatteryLevel();
+            var powerSource = DeviceService.GetPowerSource();
+            _batteryInfo = $"Battery Level: {batteryLevel}, Power Source: {powerSource}";
+        }
+        else if (Type == "deviceinfo")
+        {
+            var model = DeviceService.GetModel();
+            var manufacturer = DeviceService.GetManufacturer();
+            var osVersion = DeviceService.GetOsVersion();
+            _deviceInfo = $"Model: {model}, Manufacturer: {manufacturer}, OS Version: {osVersion}";
+        }
+    }
+}

@@ -1,0 +1,9 @@
+﻿<div style="border:1px solid #ccc; padding:10px; margin:5px; border-radius:6px;">
+    <h4>@Title</h4>
+    <p>@ChildContent</p>
+</div>
+
+@code {
+    [Parameter] public string Title { get; set; } = "Card";
+    [Parameter] public RenderFragment ChildContent { get; set; }
+}

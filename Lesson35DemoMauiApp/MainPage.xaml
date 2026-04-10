@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Lesson35DemoMauiApp"
+             xmlns:components="clr-namespace:Lesson35DemoMauiApp.Components"
+             x:Class="Lesson35DemoMauiApp.MainPage">
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Native MAUI header row -->
+        <HorizontalStackLayout Padding="10" Spacing="10">
+            <Label Text="MAUI Native Header" FontAttributes="Bold" />
+            <Button Text="Tap Me" Clicked="OnTapMeClicked"/>
+        </HorizontalStackLayout>
+        <!-- BlazorWebView in the second row -->
+        <BlazorWebView 
+            Grid.Row="1"
+            x:Name="blazorWebView" HostPage="wwwroot/index.html">
+            <BlazorWebView.RootComponents>
+                <RootComponent Selector="#app" ComponentType="{x:Type components:Routes}" />
+            </BlazorWebView.RootComponents>
+        </BlazorWebView>
+    </Grid>
+    
+</ContentPage>
