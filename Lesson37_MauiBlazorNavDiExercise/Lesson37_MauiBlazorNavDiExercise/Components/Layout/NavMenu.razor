@@ -1,6 +1,6 @@
 ﻿<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">Lesson34MauiBlazorIntro</a>
+        <a class="navbar-brand" href="">Lesson37_MauiBlazorNavDiExercise</a>
     </div>
 </div>
 
@@ -13,7 +13,7 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
-        <div class="nav-item px-3">
+        @* <div class="nav-item px-3">
             <NavLink class="nav-link" href="counter">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
             </NavLink>
@@ -22,19 +22,11 @@
             <NavLink class="nav-link" href="weather">
                 <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
             </NavLink>
-        </div>
-
-            @* Bootstrap CSS classes:
-                d-flex → turns the link into a flex container
-                align-items-center → vertically centers icon + text within the link
-                bi-lightning-charge → Bootstrap icon name
-                fs-5 → font-size level 5 (slightly larger icon for visibility)
-                me-2 → margin-end (right) spacing so text isn’t touching the icon
-            *@
-            <NavLink class="nav-link d-flex align-items-center" href="hello" Match="NavLinkMatch.All">
-                <i class="bi bi-lightning-charge fs-5 me-2"></i> Hello
+        </div> *@
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="/products">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Products
             </NavLink>
         </div>
-        
     </nav>
 </div>

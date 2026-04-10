@@ -1,0 +1,66 @@
+﻿@page "/products"
+@using Lesson37_MauiBlazorNavDiExercise.Models
+@using Lesson37_MauiBlazorNavDiExercise.Services
+@inject IProductService ProductService
+@inject IDiscountService DiscountService
+@inject NavigationManager Nav
+
+<h3>Product List</h3>
+
+@if (_products is null)
+{
+    <p><em>Loading...</em></p>
+}
+else if( !_products.Any() )
+{
+    <p>Not products available</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Discounted Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var p in _products)
+            {
+                var discounted = DiscountService.ApplyDiscount(p.Price);
+                <tr>
+                    <td>@p.Id</td>
+                    <td>@p.Name</td>
+                    <td>@p.Category</td>
+                    <td>@p.Price.ToString("C")</td>
+                    <td>@discounted.ToString("C")</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm"
+                            @onclick="() => GoToDetails(p.Id)">
+                            View
+                        </button>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<Product>? _products;
+
+    protected override void OnInitialized()
+    {
+        _products = ProductService.GetProducts();
+    }
+
+    private void GoToDetails(int id)
+    {
+        Nav.NavigateTo($"/products/{id}");  
+    }
+}

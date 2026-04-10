@@ -103,20 +103,3 @@
         overflow-y: auto;
     }
 }
-
-/* 
-   Fix for Bootstrap Icons vertical alignment inside NavLink
-
-   Why needed:
-   - Bootstrap icons are font-based (like text), so they align to the text baseline by default
-   - This can make icons appear slightly lower than the text
-   - Especially noticeable in MAUI Blazor Hybrid (WebView rendering differences)
-
-   What this does:
-   - line-height: 1 removes extra vertical spacing from the icon glyph
-   - vertical-align: middle nudges the icon to align visually with the text center
-*/
-.nav-link .bi {
-    line-height: 1;
-    vertical-align: middle;
-}

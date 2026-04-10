@@ -1,0 +1,43 @@
+﻿@page "/products/{Id:int}"
+@using Lesson37_MauiBlazorNavDiExercise.Models
+@using Lesson37_MauiBlazorNavDiExercise.Services
+@inject IProductService ProductService
+@inject NavigationManager Nav
+
+<h3>Product Detail</h3>
+
+@if (_product is null)
+{
+    <p><em>Product not found.</em></p>
+}
+else
+{
+    <div class="card p-3">
+        <h4>@_product.Name</h4>
+        <p><strong>Category:</strong> @_product.Category</p>
+        <p><strong>Price:</strong> @_product.Price.ToString("C")</p>
+        <p>@_product.Description</p>
+
+        <button class="btn btn-secondary btn-sm" @onclick="GoBack">
+            Back to list
+        </button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Product? _product;
+
+    protected override void OnParametersSet()
+    {
+        _product = ProductService.GetProduct(Id);
+    }
+
+    private void GoBack()
+    {
+        Nav.NavigateTo("/products");
+    }
+
+}
